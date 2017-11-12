@@ -7,7 +7,6 @@ Gets to 98.40% test accuracy after 20 epochs
 
 from __future__ import print_function
 
-import numpy as np
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -19,15 +18,6 @@ num_classes = 10
 epochs = 3
 
 # the data, shuffled and split between train and test sets
-# x_train = np.random.randn(50000, 784), np.random.randint(0, 10, 50000)
-
-x_train = np.random.randn(50000, 784)
-y_train = np.abs(np.around(np.mean(x_train, 1) * 100, decimals=0))
-y_train = [y if 9 >= y >= 1 else 9 for y in y_train]
-x_test = np.random.randn(10000, 784)
-y_test = np.abs(np.around(np.mean(x_test, 1) * 100, decimals=0))
-y_test = [y if 9 >= y >= 1 else 9 for y in y_test]
-'''
 (x_train, y_train), (x_test, y_test) = mnist.load_data(path='/Users/qiangwang/.keras/datasets/mnist.npz')
 # x_train.shape (60000, 28, 28)
 # x1 = x_train[0].reshape(1,784)
@@ -44,7 +34,6 @@ x_train /= 255
 x_test /= 255
 print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
-'''
 
 # convert class vectors to binary class matrices
 y_train = keras.utils.to_categorical(y_train, num_classes)
@@ -55,8 +44,6 @@ model.add(Dense(512, activation='relu', input_shape=(784,)))
 # model.add(Dropout(0.2))
 model.add(Dense(512, activation='relu'))
 # model.add(Dropout(0.2))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
 model.add(Dense(num_classes, activation='softmax'))
 
 model.summary()

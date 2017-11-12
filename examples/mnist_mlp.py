@@ -15,7 +15,7 @@ from keras.optimizers import RMSprop
 
 batch_size = 128
 num_classes = 10
-epochs = 20
+epochs = 3
 
 # the data, shuffled and split between train and test sets
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -54,3 +54,8 @@ history = model.fit(x_train, y_train,
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+
+model.save('/Users/qiangwang/.keras/datasets/mnist_model/all.h5')
+with open('/Users/qiangwang/.keras/datasets/mnist_model/model.json', 'w') as out:
+    out.write(model.to_json() + '\n')
+model.save_weights('/Users/qiangwang/.keras/datasets/mnist_model/weight.h5')
